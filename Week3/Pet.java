@@ -8,7 +8,7 @@ public class pet {
 
     //pet method
     public void petDialogue() {
-        System.out.println("\nWhose these pokemon?: " + name +"\nPikachu" + type +"\nElcectric type: " + "\ntrustlevel: " + trustlevel + "\npetlevel: " + petlevel + "\nis happy?: " + true);
+        System.out.println("\nWhose these pokemon?: " + name +"\n" + type +"\ntype: " + "\ntrustlevel: " + trustlevel + "\npetlevel: " + petlevel + "\nis happy?: " + true);
     }
     //pet constructor
     public pet(String petname, String pettype, float pettrustlevel, int petpetlevel, Boolean petishappy){
