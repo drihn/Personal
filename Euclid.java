@@ -1,11 +1,11 @@
-package SS;
+package ssss;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class LOGIN extends JFrame implements ActionListener {
+public class LOGS extends JFrame implements ActionListener {
     private ArrayList<String> usernames;
     private ArrayList<String> passwords;
     private JLabel usernameLabel;
@@ -14,19 +14,20 @@ public class LOGIN extends JFrame implements ActionListener {
     private JPasswordField passwordField;
     private JButton loginButton;
 
-    public LOGIN() {
+    public LOGS() {
         super("Login System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Initialize the usernames and passwords
         usernames = new ArrayList<String>();
         passwords = new ArrayList<String>();
-        usernames.add("	");
+        usernames.add("Admin_01");
         passwords.add("AdminOne");
         usernames.add("Admin_02");
         passwords.add("AdminTwo");
         usernames.add("Admin_03");
         passwords.add("AdminThree");
+
 
         // Create the login form components
         usernameLabel = new JLabel("Username:");
@@ -75,15 +76,12 @@ public class LOGIN extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Incorrect Username");
         } else if (!passwordMatch) {
             JOptionPane.showMessageDialog(this, "Incorrect Password");
-        } else if (!passwordMatch) {
-                JOptionPane.showMessageDialog(this, "Incorrect Username & Password");
         } else {
             JOptionPane.showMessageDialog(this, "Login Successful!");
-            
         }
     }
 
     public static void main(String[] args) {
-        new LOGIN();
+        new LOGS();
     }
 }
