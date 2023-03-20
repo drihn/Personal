@@ -1,87 +1,80 @@
 package ssss;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
-public class LOGS extends JFrame implements ActionListener {
-    private ArrayList<String> usernames;
-    private ArrayList<String> passwords;
-    private JLabel usernameLabel;
-    private JLabel passwordLabel;
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JButton loginButton;
-
-    public LOGS() {
-        super("Login System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Initialize the usernames and passwords
+public class sssa extends JFrame implements ActionListener {
+    JLabel userLabel, passLabel;
+    JTextField userText;
+    JPasswordField passText;
+    JButton loginButton, forgotButton;
+    ArrayList<String> usernames;
+    ArrayList<String> passwords;
+    
+    public sssa() {
         usernames = new ArrayList<String>();
-        passwords = new ArrayList<String>();
         usernames.add("Admin_01");
-        passwords.add("AdminOne");
         usernames.add("Admin_02");
-        passwords.add("AdminTwo");
         usernames.add("Admin_03");
+        passwords = new ArrayList<String>();
+        passwords.add("AdminOne");
+        passwords.add("AdminTwo");
         passwords.add("AdminThree");
-
-
-        // Create the login form components
-        usernameLabel = new JLabel("Username:");
-        passwordLabel = new JLabel("Password:");
-        usernameField = new JTextField();
-        passwordField = new JPasswordField();
+        
+        userLabel = new JLabel("Username:");
+        userLabel.setBounds(50, 50, 80, 30);
+        passLabel = new JLabel("Password:");
+        passLabel.setBounds(50, 100, 80, 30);
+        userText = new JTextField();
+        userText.setBounds(150, 50, 150, 30);
+        passText = new JPasswordField();
+        passText.setBounds(150, 100, 150, 30);
         loginButton = new JButton("Login");
-
-        // Set the layout and add the components
-        setLayout(new GridLayout(3, 2));
-        add(usernameLabel);
-        add(usernameField);
-        add(passwordLabel);
-        add(passwordField);
-        add(loginButton);
-
-        // Add the login button action listener
+        loginButton.setBounds(50, 150, 100, 30);
         loginButton.addActionListener(this);
-
-        // Show the login form
-        pack();
-        setLocationRelativeTo(null);
+        forgotButton = new JButton("Forgot Password");
+        forgotButton.setBounds(200, 150, 150, 30);
+        forgotButton.addActionListener(this);
+        
+        add(userLabel);
+        add(userText);
+        add(passLabel);
+        add(passText);
+        add(loginButton);
+        add(forgotButton);
+        
+        setSize(400, 250);
+        setTitle("Login System");
+        setLayout(null);
         setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
+    
     public void actionPerformed(ActionEvent e) {
-        String username = usernameField.getText();
-        String password = new String(passwordField.getPassword());
-
-        boolean usernameFound = false;
-        boolean passwordMatch = false;
-
-        // Check if the username exists
-        for (int i = 0; i < usernames.size(); i++) {
-            if (usernames.get(i).equals(username)) {
-                usernameFound = true;
-                if (passwords.get(i).equals(password)) {
-                    passwordMatch = true;
-                    break;
-                }
+        if (e.getSource() == loginButton) {
+            String username = userText.getText();
+            String password = new String(passText.getPassword());
+            int index = usernames.indexOf(username);
+            if (index == -1) {
+                JOptionPane.showMessageDialog(this, "Incorrect Username and Password");
+            } else if (!passwords.get(index).equals(password)) {
+                JOptionPane.showMessageDialog(this, "Incorrect Password");
+            } else {
+                JOptionPane.showMessageDialog(this, "Login successful");
+            }
+        } else if (e.getSource() == forgotButton) {
+            String username = JOptionPane.showInputDialog(this, "Enter username:");
+            int index = usernames.indexOf(username);
+            if (index == -1) {
+                JOptionPane.showMessageDialog(this, "Incorrect Username");
+            } else {
+                JOptionPane.showMessageDialog(this, "Your password is: " + passwords.get(index));
             }
         }
-
-        // Show the appropriate message
-        if (!usernameFound) {
-            JOptionPane.showMessageDialog(this, "Incorrect Username");
-        } else if (!passwordMatch) {
-            JOptionPane.showMessageDialog(this, "Incorrect Password");
-        } else {
-            JOptionPane.showMessageDialog(this, "Login Successful!");
-        }
     }
-
+    
     public static void main(String[] args) {
-        new LOGS();
+        sssa loginSystem = new sssa();
     }
 }
