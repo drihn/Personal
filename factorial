@@ -1,32 +1,81 @@
-import java.util.*;
-public class as{
-    static Scanner in = new Scanner (System.in);
-    public static void main (String [] args){
+package java;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+
+public class MMAMA extends JFrame implements ActionListener {
+    private JLabel usernameLabel, passwordLabel;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    private JButton loginButton;
+    private ArrayList<String> usernames;
+    private ArrayList<String> passwords;
+
+    public MMAMA() {
+        super("Login System");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(3, 2));
+
+        usernameLabel = new JLabel("Username:");
+        passwordLabel = new JLabel("Password:");
+        usernameField = new JTextField();
+        passwordField = new JPasswordField();
+        loginButton = new JButton("Login");
+        loginButton.addActionListener(this);
+
+        add(usernameLabel);
+        add(usernameField);
+        add(passwordLabel);
+        add(passwordField);
+        add(new JLabel(""));
+        add(loginButton);
+
+        usernames = new ArrayList<String>();
+        passwords = new ArrayList<String>();
+        // add some sample users
+        usernames.add("Admin_01");
+        passwords.add("AdminOne");
+        usernames.add("Admin_02");
+        passwords.add("AdminTwo");
+        usernames.add("Admin_03");
+        passwords.add("AdminThree");
         
-    System.out.print("Enter a number: ");
-       int num = in.nextInt();
 
-       System.out.println("The Factorial of " + num + " is: " + factorial(num));
-       factorial(num);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
-    public static int  factorial(int x){
 
-        if (x == 1){
-            return 1;
+    public void actionPerformed(ActionEvent e) {
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+        boolean foundUsername = false;
+        boolean correctPassword = false;
+
+        // check if username exists
+        for (int i = 0; i < usernames.size(); i++) {
+            if (username.equals(usernames.get(i))) {
+                foundUsername = true;
+                if (password.equals(passwords.get(i))) {
+                    correctPassword = true;
+                    break;
+                }
+            }
         }
-        return x * factorial (x-1);
+
+        // display appropriate message based on login attempt
+        if (!foundUsername) {
+            JOptionPane.showMessageDialog(this, "Incorrect username.");
+        } else if (!correctPassword) {
+            JOptionPane.showMessageDialog(this, "Incorrect password.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Login successful.");
+        }
     }
 
+    public static void main(String[] args) {
+        new MMAMA();
+    }
 }
-
-
-return 4 * factorial 4-1 >> factorial (3) = 6 * 4 = 24
-return 3 * factorial 3-1 >> factorial(2) = 2 * 3  = 6 
-return 2 * facotrial 2-1 >> factorial(1) = 1 * 2 = 2
-return 1 = factorial(1) = 1
-
-
-factorial (1) = 1
-factorial (2) = 2
-factorial (3) = 6
-factorial (4) = 24;
