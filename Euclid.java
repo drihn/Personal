@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class LOLOG extends JFrame implements ActionListener {
+public class LOGIN extends JFrame implements ActionListener {
     private ArrayList<String> usernames;
     private ArrayList<String> passwords;
     private JLabel usernameLabel;
@@ -14,14 +14,14 @@ public class LOLOG extends JFrame implements ActionListener {
     private JPasswordField passwordField;
     private JButton loginButton;
 
-    public LOLOG() {
+    public LOGIN() {
         super("Login System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Initialize the usernames and passwords
         usernames = new ArrayList<String>();
         passwords = new ArrayList<String>();
-        usernames.add("Admin_01");
+        usernames.add("	");
         passwords.add("AdminOne");
         usernames.add("Admin_02");
         passwords.add("AdminTwo");
@@ -36,12 +36,12 @@ public class LOLOG extends JFrame implements ActionListener {
         loginButton = new JButton("Login");
 
         // Set the layout and add the components
-        getContentPane().setLayout(new GridLayout(3, 2));
-        getContentPane().add(usernameLabel);
-        getContentPane().add(usernameField);
-        getContentPane().add(passwordLabel);
-        getContentPane().add(passwordField);
-        getContentPane().add(loginButton);
+        setLayout(new GridLayout(3, 2));
+        add(usernameLabel);
+        add(usernameField);
+        add(passwordLabel);
+        add(passwordField);
+        add(loginButton);
 
         // Add the login button action listener
         loginButton.addActionListener(this);
@@ -71,18 +71,19 @@ public class LOLOG extends JFrame implements ActionListener {
         }
 
         // Show the appropriate message
-        if (!usernameFound && !passwordMatch) {
-            JOptionPane.showMessageDialog(this, "Incorrect Username and Password");
-        } else if (!usernameFound) {
+        if (!usernameFound) {
             JOptionPane.showMessageDialog(this, "Incorrect Username");
         } else if (!passwordMatch) {
             JOptionPane.showMessageDialog(this, "Incorrect Password");
+        } else if (!passwordMatch) {
+                JOptionPane.showMessageDialog(this, "Incorrect Username & Password");
         } else {
             JOptionPane.showMessageDialog(this, "Login Successful!");
+            
         }
     }
 
     public static void main(String[] args) {
-        new LOLOG();
+        new LOGIN();
     }
 }
